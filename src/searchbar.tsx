@@ -1,7 +1,7 @@
 import { useState } from "react";
 import AddNote from "./addNote"
 import AddNoteButton from "./AddNoteButton";
-import { NewNoteIcon, SearchIcon } from "./icons"
+import { SearchIcon } from "./icons"
 
 
 

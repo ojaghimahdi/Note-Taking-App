@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import NoteTypeBoxReducer from '../NoteTypeBox';
+import NoteTypeBoxReducer from './NoteTypeBox';
 
 export const store = configureStore({
     reducer:{

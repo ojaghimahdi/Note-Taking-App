@@ -1,7 +1,16 @@
 import { Fragment } from 'react/jsx-runtime';
+import { Link, useSearchParams } from 'react-router-dom';
 import './App.css'
 import { AllNetesIcon, PinedIcon, SettingIcon, TrashIcon } from './icons';
+import { useSelector } from 'react-redux';
+import type { RootState } from './Store';
+import { optionUrl } from './NoteTypeBox';
 function Sidebar() {
+    const { selectOptions } = useSelector(
+        (state: RootState) => state.typeBox
+    );
+    const [searchParams] = useSearchParams();
+    const openOption = searchParams.get("option");
     return (
         <Fragment>
             <div className='h-1/2 flex  flex-col'>
@@ -33,20 +42,18 @@ function Sidebar() {
 
                 <div className='flex flex-col cursor-default select-none gap-6 w-full mt-12'>
                 
-                        <div className='flex w-full h-12 items-center'>                   
-                            <div className='w-4 h-4 rounded-full bg-amber-400 mx-4'></div>
-                            <div>job</div>                                                
-                        </div>
-
-                    <div className='flex w-full h-12 items-center'>
-                        <div className='w-4 h-4 rounded-full bg-blue-400 mx-4'></div>
-                        <div>home</div>
-                    </div>
-
-                    <div className='flex w-full h-12 items-center'>
-                        <div className='w-4 h-4 rounded-full bg-green-400 mx-4'></div>
-                        <div>other</div>
-                    </div>
+                       {selectOptions.map((option) => (
+                        <Link
+                            key={option.value}
+                            to={optionUrl(option)}
+                            className={`flex w-full h-12 items-center ${openOption === option.value ? "bg-gray-300" : ""}`}
+                        >
+                            <div className='flex items-center pl-4'>
+                                <div className={`w-4 h-4 rounded-full bg-${option.color}-400 mx-4`}></div>
+                                {option.name}
+                                </div>
+                        </Link>
+                       ))}
 
                 </div>
 
